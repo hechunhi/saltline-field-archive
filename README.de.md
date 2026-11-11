@@ -2,6 +2,24 @@
 
 [English](README.md) · **Deutsch** · [简体中文](README.zh-CN.md)
 
+## Ein 3D-Hafenspiel in nur 3,55 MB
+
+Das Bemerkenswerte an Saltline ist seine Größe: Das ursprünglich veröffentlichte Spiel passt in **eine einzige HTML-Datei mit 3,55 MB**. Darin stecken Three.js, Spiellogik, Hafenszene, Waffen, Roboter, Materialien und Klangsynthese. Der aktive JavaScript- und CSS-Spielkern belegt lediglich **1,65 MB**, einschließlich Three.js.
+
+| Gemessener Bestandteil | Dateigröße |
+| --- | --- |
+| Veröffentlichtes Original: `original/index.html` | **3,55 MB** — 3.552.517 Bytes |
+| Aktiver Spielkern: `game.js` + `ui.css` | **1,65 MB** — 1.652.301 Bytes |
+
+Diese kompakte Größe entsteht dadurch, dass die Spielinhalte im Browser mathematisch erzeugt werden:
+
+- **Prozedurale Geometrie:** Parameter, wiederholte Grundkörper, extrudierte Profile, Rotationsflächen und Splines konstruieren Container, Maschinen, Waffen und Roboter.
+- **Prozedurale Materialien:** Shader, Rauschfunktionen und erzeugte Canvas-Texturen liefern Oberflächendetails, Lack, Rost, Verschleiß und Beschriftungen.
+- **Prozedurales Audio:** Mathematische Wellenformen, Rauschen, Hüllkurven, Filter und geschichtete Synthese erzeugen Schüsse, Treffer, Maschinen, Wetter und Musik. Die Soundbank umfasst **79 Klänge mit 136 Varianten**.
+- **Wiederverwendung und kompakte Bündelung:** Gemeinsame Geometrie- und Synthesefunktionen, Seed-gesteuerte Variation und ein minifizierter JavaScript-Bundle halten die gespeicherte Darstellung klein.
+
+Meshes, Texturen und Audiopuffer entstehen zur Laufzeit; separate Modell-, Texturbild- oder aufgenommene Audiodateien werden für das Spiel nicht benötigt. Die Angaben verwenden dezimale MB (1 MB = 1.000.000 Bytes). Die Original-HTML-Datei enthält zusätzlich eine eingebettete frühere Spielversion. Lokale Fontdateien, dieser ergänzende Katalog, Dokumentation und Screenshots kommen zu den gemessenen Größen hinzu.
+
 Ein lokaler, offline nutzbarer Browserkatalog für die **prozeduralen 3D-Objekte, mathematischen Funktionen und synthetisierten Klänge von Saltline**. Enthalten sind das ursprüngliche spielbare Hafenspiel, ein interaktiver Viewer, gesetzte Formeln, lesbare Quellfunktionen und Klangvorschauen mit WAV-Export.
 
 Grundlage ist das öffentliche Saltline-Claude-Artefakt. Dessen eingebetteter Autorenhinweis nennt **Claude Fable 5.2** als Urheber der ersten Spielversion. Dieses Repository ergänzt den lokalen Betrieb und den mehrsprachigen Katalog. Siehe [Herkunft und Quellen](#herkunft-und-quellen).

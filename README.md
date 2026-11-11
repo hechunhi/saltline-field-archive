@@ -2,6 +2,24 @@
 
 **English** · [Deutsch](README.de.md) · [简体中文](README.zh-CN.md)
 
+## A 3D harbor game in just 3.55 MB
+
+The remarkable part of Saltline is its size: the original published game fits in a **single 3.55 MB HTML file**, including Three.js, game logic, the harbor scene, weapons, robots, materials, and sound synthesis. Its active JavaScript and CSS core occupies just **1.65 MB**, with Three.js already included.
+
+| Measured component | File size |
+| --- | --- |
+| Published original: `original/index.html` | **3.55 MB** — 3,552,517 bytes |
+| Active game core: `game.js` + `ui.css` | **1.65 MB** — 1,652,301 bytes |
+
+This compact size comes from generating the game's content mathematically in the browser:
+
+- **Procedural geometry:** parameters, repeated primitives, extruded profiles, surfaces of revolution, and splines construct containers, machinery, weapons, and robots.
+- **Procedural materials:** shaders, noise functions, and generated canvas textures create surface detail, paint, rust, wear, and labels.
+- **Procedural audio:** mathematical waveforms, noise, envelopes, filters, and layered synthesis generate shots, impacts, machinery, weather, and music. The sound bank contains **79 sounds with 136 variants**.
+- **Code reuse and compact bundling:** shared geometry and synthesis functions, seeded variation, and a minified JavaScript bundle keep the stored representation small.
+
+The browser creates meshes, textures, and audio buffers at runtime, so the game does not need separate model, texture-image, or recorded-audio assets. Sizes above use decimal MB (1 MB = 1,000,000 bytes). The original HTML also retains an embedded earlier game version; local font files, this additional catalog, documentation, and screenshots are separate from these measurements.
+
 Explore the **procedural 3D objects, mathematics, and synthesized audio of Saltline** in a local, offline-ready browser catalog. Includes the original playable harbor game, an interactive viewer, typeset equations, readable source functions, and sound previews with WAV export.
 
 Based on the public Saltline Claude artifact, whose embedded author note credits **Claude Fable 5.2** for the initial game. This repository adds the local packaging and multilingual field archive. See [origin and attribution](#origin-and-attribution).
