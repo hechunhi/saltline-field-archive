@@ -1,0 +1,30 @@
+{
+  "viewerPath": "/artifact/BGY1SztrAYcJQHSsnHHGmp",
+  "viewerOrigin": "https://claude.ai",
+  "kind": "public",
+  "ver": "1794338661-8a5e",
+  "title": "Saltline",
+  "icon": "Interactive",
+  "tint": "red",
+  "mode": "public",
+  "hasThumb": false,
+  "translateEnabled": true,
+  "shareSheetV2": true,
+  "installEnabled": true,
+  "hostLoaderEnabled": true,
+  "public_view_count": 295255,
+  "copyPageLinkEnabled": true,
+  "duplicable": true,
+  "hot": true,
+  "seq": 3,
+  "files": [
+    {
+      "path": "index.html",
+      "size": 3552517,
+      "contentType": "text/html",
+      "sha256": "b346ad3a5f4ee697a95439c3f9ba1a4d4b600719e3918e72147883541b7c0883"
+    }
+  ],
+  "filesNarrowed": true,
+  "serverNow": 1794354196726
+}

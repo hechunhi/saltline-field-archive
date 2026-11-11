@@ -1,0 +1,20 @@
+// TeX is converted to local HTML + semantic MathML by bun run catalog:math.
+export const latex = {
+  "Vom Bauteil zum Objekt": String.raw`\mathbf p_{\mathrm{w}}=\mathbf T\,\mathbf R\,\mathbf S\,\mathbf p_{\mathrm{l}}`,
+  "Gelenkkette der Finger": String.raw`\mathbf M_{\mathrm{n}}=\mathbf M_{0}\prod_{i=1}^{n}\bigl(\mathbf T_i\,\mathbf R_i\bigr)`,
+  "Quader & Fasen": String.raw`\begin{gathered}x\in\left[-\frac b2,\frac b2\right],\quad y\in\left[-\frac h2,\frac h2\right],\quad z\in\left[-\frac d2,\frac d2\right]\\[6pt]0<r_{\mathrm{b}}<\frac{\min(b,h,d)}2\end{gathered}`,
+  Rotationskörper: String.raw`\mathbf p(\theta,j)=\begin{pmatrix}r_j\sin\theta\\y_j\\r_j\cos\theta\end{pmatrix},\qquad\theta_i=\frac{2\pi i}{N}`,
+  "Wiederholte Bauteile": String.raw`\mathbf p_i=\mathbf p_0+i\,\Delta\mathbf p,\qquad i=0,\ldots,N-1`,
+  "Deterministische Oberflächenvariation": String.raw`\begin{aligned}u&=x-\lfloor x\rfloor,\quad v=z-\lfloor z\rfloor\\s(u)&=u^2(3-2u)\\N(x,z)&=a+(b-a)s(u)+(c-a)s(v)\\&\quad +(a-b-c+d)\,s(u)\,s(v)\end{aligned}`,
+  "Rohre & Verbindungen": String.raw`\begin{aligned}L&=\lVert\mathbf B-\mathbf A\rVert\\[5pt]\mathbf M&=\frac{\mathbf A+\mathbf B}{2},\qquad\hat{\mathbf d}=\frac{\mathbf B-\mathbf A}{L}\end{aligned}`,
+  "Trapezförmige Containerwellung": String.raw`\begin{gathered}u=\bigl((x\bmod P)+P\bigr)\bmod P,\quad a=P-f-2s\\[8pt]z(u)=\begin{cases}0,&u\le f,\\[3pt]-\dfrac{d(u-f)}{s},&f<u<f+s,\\[7pt]-d,&f+s\le u\le f+s+a,\\[3pt]-d\!\left(1-\dfrac{u-f-s-a}{s}\right),&u>f+s+a.\end{cases}\end{gathered}`,
+  "Inverse Kinematik der Beine": String.raw`\begin{aligned}c&=\sqrt{\max\left(x^2+y^2-o^2,10^{-6}\right)}\\[5pt]D&=\operatorname{clamp}\!\left(\sqrt{c^2+z^2},\,|L_1-L_2|+0.03,\,0.995(L_1+L_2)\right)\\[5pt]\alpha&=\arccos\!\left[\operatorname{clamp}\!\left(\frac{L_1^2+D^2-L_2^2}{2L_1D},-1,1\right)\right]\\[5pt]\beta&=\arccos\!\left[\operatorname{clamp}\!\left(\frac{L_1^2+L_2^2-D^2}{2L_1L_2},-1,1\right)\right]\\[5pt]\theta_{\mathrm{hip}}&=\alpha-\operatorname{atan2}(z,c),\qquad\theta_{\mathrm{knee}}=-(\pi-\beta)\end{aligned}`,
+  "Gedämpfte Feder": String.raw`\begin{aligned}v_{n+1}&=v_n+\bigl[k(x_{\star}-x_n)-c\,v_n\bigr]\,\Delta t\\[5pt]x_{n+1}&=x_n+v_{n+1}\,\Delta t\end{aligned}`,
+  "Überlagerung von Wasserwellen": String.raw`\begin{aligned}k_i&=\frac{2\pi}{\lambda_i},\qquad\omega_i=\sqrt{9.81\,k_i}\\[5pt]A(x,z)&=1-\operatorname{smoothstep}\!\left(50,220,\sqrt{(x-30)^2+z^2}\right)\\[5pt]h(x,z,t)&=h_0+A(x,z)\sum_{i=1}^{4}a_i\sin\!\left[k_i(d_{x,i}x+d_{z,i}z)-\omega_i t\right]\end{aligned}`,
+  "Hüllkurve & Frequenzverlauf": String.raw`\begin{aligned}E(t)&=\left(1-e^{-t/\tau_{\mathrm{a}}}\right)e^{-t/\tau_{\mathrm{d}}}\\[7pt]f(u)&=f_0\left(\frac{f_1}{f_0}\right)^{u^c},\qquad 0\le u\le1\end{aligned}`,
+  "Mischen, filtern, normalisieren": String.raw`\begin{aligned}m&=\operatorname{round}(\Delta t\,f_s)\\y[n+m]&\mathrel{+}=g\,x[n]\\[6pt]y[n]&=b_0x[n]+b_1x[n-1]+b_2x[n-2]\\&\quad-a_1y[n-1]-a_2y[n-2]\\[6pt]x_{\mathrm{out}}[n]&=x[n]\,\frac{P_{\star}}{\max_j|x[j]|}\end{aligned}`,
+  "Pulsierendes Signallicht": String.raw`\begin{aligned}I_{\mathrm{live}}(t)&=5.5+3\sin(2.2t)\\[5pt]I_{\mathrm{cutting}}(t)&=\begin{cases}9,&\sin(2\pi\cdot5.5t)>0,\\0.5,&\sin(2\pi\cdot5.5t)\le0.\end{cases}\end{aligned}`,
+  "Schwingung des Spreaders": String.raw`\begin{aligned}\theta_x(t)&=0.012\sin(0.52t)\\&\quad+0.004\sin(1.31t+1)\\[5pt]\theta_z(t)&=0.009\sin(0.41t+1.1)\end{aligned}`,
+  "Parametrische Rumpffläche": String.raw`\begin{aligned}r&=\operatorname{clamp}\!\left(\frac{y-y_{\min}}{y_{\max}-y_{\min}},0,1\right)\\[5pt]a(y)&=17-8.5\,r^{1.3}\\[5pt]c(s,y)&=\begin{cases}\sin^{0.72}\!\left(\dfrac{\pi s}{2a(y)}\right),&s<a(y),\\1,&s\ge a(y),\end{cases}\\[7pt]x(s,y,\sigma)&=x_0+\sigma\bigl[0.2+(B-0.2)c(s,y)\bigr]\end{aligned}`,
+  "Rollen & Stampfen": String.raw`\begin{aligned}\theta_x(t)&=0.05\sin(0.9t+0.4)+0.016\sin(2.1t)\\[5pt]\theta_z(t)&=0.02\sin(1.3t+2)\end{aligned}`,
+};

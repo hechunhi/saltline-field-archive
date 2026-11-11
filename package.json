@@ -1,0 +1,15 @@
+{
+  "name": "saltline-local",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun server.ts",
+    "dev": "bun --watch server.ts",
+    "catalog:extract": "bun scripts/extract-catalog.ts",
+    "catalog:check": "bun scripts/check-catalog.ts",
+    "catalog:math": "bun scripts/render-catalog-math.ts"
+  },
+  "devDependencies": {
+    "katex": "0.19.1"
+  }
+}

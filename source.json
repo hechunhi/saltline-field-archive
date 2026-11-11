@@ -1,0 +1,87 @@
+{
+  "source": "https://claude.ai/artifact/BGY1SztrAYcJQHSsnHHGmp",
+  "downloaded_at": "2026-11-10T23:46:57.300721+00:00",
+  "frame_id": "5326a6ff-d95f-4e59-9b2e-b3f3bcb780e3",
+  "version": "1794338661-8a5e",
+  "download_url": "https://5326a6ff-d95f-4e59-9b2e-b3f3bcb780e3.frame.claudeusercontent.com/_f/1794338661-8a5e/index.html",
+  "original": {
+    "path": "original/index.html",
+    "bytes": 3552517,
+    "sha256": "b346ad3a5f4ee697a95439c3f9ba1a4d4b600719e3918e72147883541b7c0883",
+    "matches_published_sha256": true
+  },
+  "removed_platform_preamble_bytes": 40960,
+  "local_changes": [
+    "Extract inline CSS to ui.css and JavaScript to game.js without modifying their contents",
+    "Download fonts and replace Google Fonts links in current and embedded legacy version",
+    "Add doctype, UTF-8 charset and standalone viewport metadata"
+  ],
+  "resources": [
+    {
+      "url": "https://fonts.gstatic.com/s/barlowcondensed/v13/HTx3L3I-JCGChYJ8VI-L6OO_au7B2xY.ttf",
+      "path": "assets/fonts/barlow-condensed-400.ttf",
+      "bytes": 80968,
+      "sha256": "c82d65280835cb3cd1b499863cf68cae8c6193c45ffae9495d28d01f749a9ae2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/barlowcondensed/v13/HTxwL3I-JCGChYJ8VI-L6OO_au7B4-Lw_3E.ttf",
+      "path": "assets/fonts/barlow-condensed-500.ttf",
+      "bytes": 81448,
+      "sha256": "cc9fb2539cf27df48255982e896d28f544483537cdb41f9fabd741af8992d719"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/barlowcondensed/v13/HTxwL3I-JCGChYJ8VI-L6OO_au7B4873_3E.ttf",
+      "path": "assets/fonts/barlow-condensed-600.ttf",
+      "bytes": 86636,
+      "sha256": "0d85af813fc3ed87db0c6265515689b2eef5cbaf7aab17922528dfc95a2cd73f"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/bigshouldersdisplay/v24/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0Ydb07JF4.ttf",
+      "path": "assets/fonts/big-shoulders-display-500.ttf",
+      "bytes": 68592,
+      "sha256": "a9b588db952ce332791924195f09d10805aea45d78ffef316b70f2b0194f5e9e"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/bigshouldersdisplay/v24/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YdWg8JF4.ttf",
+      "path": "assets/fonts/big-shoulders-display-700.ttf",
+      "bytes": 68456,
+      "sha256": "677d6cfbd0e22c58948e917b53bfbaf14324280aebda4b156cc41e3649ee1d81"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/bigshouldersdisplay/v24/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YdSY8JF4.ttf",
+      "path": "assets/fonts/big-shoulders-display-900.ttf",
+      "bytes": 68720,
+      "sha256": "23ce8d950bbbc0f13fbe3fc11047ec0c2babddd95243de26c85c855ede537c30"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n5ig.ttf",
+      "path": "assets/fonts/ibm-plex-mono-400.ttf",
+      "bytes": 128812,
+      "sha256": "a7fdc993f9f0387caedba4e42521136fa97e4c0837ae6239bf0413ccf8af00c2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJ8lc.ttf",
+      "path": "assets/fonts/ibm-plex-mono-500.ttf",
+      "bytes": 129916,
+      "sha256": "4fc14a73ca53ba9d32fd759ae1ca1a3133326035d0dd337862b3ee1633cc156e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowcondensed/OFL.txt",
+      "path": "assets/fonts/barlow-condensed-OFL.txt",
+      "bytes": 4377,
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/bigshouldersdisplay/OFL.txt",
+      "path": "assets/fonts/big-shoulders-display-OFL.txt",
+      "bytes": 4396,
+      "sha256": "338f9c050f19daeda1d597243faf79f3a3d437c338af58cb7047617d0ce08771"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/OFL.txt",
+      "path": "assets/fonts/ibm-plex-mono-OFL.txt",
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    }
+  ]
+}

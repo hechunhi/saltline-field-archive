@@ -1,0 +1,26 @@
+.catalog-link {
+  display: none;
+  position: fixed;
+  z-index: 45;
+  left: max(18px, env(safe-area-inset-left));
+  top: max(9px, env(safe-area-inset-top));
+  font:
+    500 11px/1.4 "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #d4f392;
+  border-bottom: 1px solid #d4f39266;
+  padding: 2px 0;
+  pointer-events: auto;
+}
+body:has(.menu.open):not(:has(.panel:not([hidden]))) .catalog-link {
+  display: block;
+}
+.catalog-link:hover,
+.catalog-link:focus-visible {
+  color: #fff;
+  outline: 1px solid #d4f392;
+  outline-offset: 5px;
+}

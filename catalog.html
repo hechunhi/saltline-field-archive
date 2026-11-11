@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111614" />
+    <title>Saltline — Object &amp; Sound Catalog</title>
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/katex/katex.min.css" />
+    <link rel="stylesheet" href="catalog/styles.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <a
+        class="wordmark"
+        href="/"
+        data-i18n-aria-label="Saltline Spiel öffnen"
+        aria-label="Open the Saltline game"
+        >SALTLINE<span data-i18n="FIELD ARCHIVE / 01"
+          >FIELD ARCHIVE / 01</span
+        ></a
+      >
+      <div class="masthead-title" data-i18n="DIE MATHEMATIK DES HAFENS">
+        THE MATHEMATICS OF THE HARBOR
+      </div>
+      <div class="masthead-actions">
+        <label class="language-switch"
+          ><span data-i18n="Sprache">Language</span
+          ><select
+            id="language"
+            data-i18n-aria-label="Sprache"
+            aria-label="Language"
+          >
+            <option value="en" lang="en">English</option>
+            <option value="de" lang="de">Deutsch</option>
+            <option value="zh" lang="zh-Hans">简体中文</option>
+          </select></label
+        >
+        <a class="back-link" href="/"
+          ><span data-i18n="ZUM SPIEL">PLAY THE GAME</span>
+          <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <div class="eyebrow">
+            <span class="status-dot"></span
+            ><span data-i18n="PROZEDURALES ARCHIV">PROCEDURAL ARCHIVE</span>
+          </div>
+          <h1 id="page-title">
+            <span data-i18n="Form. Funktion.">Form. Function.</span>
+            <em data-i18n="Frequenz.">Frequency.</em>
+          </h1>
+          <p>
+            <span
+              data-i18n="Die Objekte und Klänge von Saltline, aus ihrem Code herausgelöst."
+              >The objects and sounds of Saltline, extracted from their
+              code.</span
+            ><br /><span
+              data-i18n="Geometrie untersuchen, Formeln verstehen, Synthese hören."
+              >Explore geometry, understand the formulas, hear the
+              synthesis.</span
+            >
+          </p>
+        </div>
+        <div
+          class="archive-counts"
+          id="counts"
+          data-i18n-aria-label="Umfang des Katalogs"
+          aria-label="Catalog contents"
+        ></div>
+      </section>
+      <div class="catalog-layout">
+        <aside
+          class="index-panel"
+          data-i18n-aria-label="Katalog durchsuchen"
+          aria-label="Search the catalog"
+        >
+          <label class="search"
+            ><span aria-hidden="true">⌕</span
+            ><input
+              id="search"
+              type="search"
+              data-i18n-placeholder="Objekt, Klang oder Funktion …"
+              placeholder="Object, sound or function …"
+              data-i18n-aria-label="Katalog durchsuchen"
+              aria-label="Search the catalog"
+            /><kbd>/</kbd></label
+          >
+          <nav
+            id="categories"
+            class="categories"
+            data-i18n-aria-label="Kategorien"
+            aria-label="Categories"
+          ></nav>
+          <div class="index-caption">
+            <span data-i18n="VERZEICHNIS">INDEX</span
+            ><span id="result-count" aria-live="polite"></span>
+          </div>
+          <div id="entry-list" class="entry-list"></div>
+          <p class="index-note">
+            <span data-i18n="Geometrie und Sound entstehen lokal."
+              >Geometry and sound are generated locally.</span
+            ><br /><span data-i18n="Keine externen Modelle oder Audiodateien."
+              >No external models or audio files.</span
+            >
+          </p>
+        </aside>
+        <article id="detail" class="detail" aria-labelledby="entry-title">
+          <div class="entry-heading">
+            <div>
+              <div class="eyebrow" id="entry-category"></div>
+              <h2 id="entry-title">Opening the archive …</h2>
+            </div>
+            <span id="entry-number" class="entry-number"></span>
+          </div>
+          <p id="entry-description" class="entry-description"></p>
+          <div class="stage" id="stage">
+            <canvas
+              id="object-view"
+              data-i18n-aria-label="Drehbare 3D-Vorschau"
+              aria-label="Interactive 3D preview"
+              tabindex="0"
+            ></canvas>
+            <canvas
+              id="signal-view"
+              data-i18n-aria-label="Wellenform oder Funktionsgraph"
+              aria-label="Waveform or function plot"
+            ></canvas>
+            <div class="stage-topline">
+              <span id="stage-label">LIVE / GEOMETRY</span
+              ><span id="stage-status" role="status">Loading</span>
+            </div>
+            <div id="stage-message" role="status"></div>
+            <div class="stage-footer">
+              <span id="stage-hint">DRAG · ROTATE / SCROLL · ZOOM</span>
+              <div id="view-controls">
+                <button
+                  id="rotate"
+                  type="button"
+                  aria-pressed="false"
+                  data-i18n="↻ Rotation"
+                >
+                  ↻ Rotate</button
+                ><button
+                  id="wireframe"
+                  type="button"
+                  aria-pressed="false"
+                  data-i18n="Drahtgitter"
+                >
+                  Wireframe</button
+                ><button
+                  id="reset-view"
+                  type="button"
+                  data-i18n="Ansicht zurücksetzen"
+                >
+                  Reset view
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="parameters" class="parameters"></div>
+          <div id="facts" class="facts"></div>
+          <div
+            class="detail-tabs"
+            role="tablist"
+            data-i18n-aria-label="Details"
+            aria-label="Details"
+          >
+            <button
+              id="tab-math"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-math"
+              type="button"
+            >
+              01 <span data-i18n="Mathematik">Mathematics</span>
+            </button>
+            <button
+              id="tab-source"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-source"
+              tabindex="-1"
+              type="button"
+            >
+              02 <span data-i18n="Quellcode">Source code</span>
+            </button>
+            <button
+              id="tab-audio"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-audio"
+              tabindex="-1"
+              type="button"
+            >
+              03 <span data-i18n="Sound">Sound</span
+              ><span id="sound-count" class="tiny-count"></span>
+            </button>
+          </div>
+          <section
+            id="panel-math"
+            role="tabpanel"
+            aria-labelledby="tab-math"
+            class="tab-panel"
+          ></section>
+          <section
+            id="panel-source"
+            role="tabpanel"
+            aria-labelledby="tab-source"
+            class="tab-panel"
+            hidden
+          ></section>
+          <section
+            id="panel-audio"
+            role="tabpanel"
+            aria-labelledby="tab-audio"
+            class="tab-panel"
+            hidden
+          ></section>
+        </article>
+      </div>
+      <footer class="page-footer">
+        <span data-i18n="SALTLINE / LOKALES ARCHIV"
+          >SALTLINE / LOCAL ARCHIVE</span
+        ><span id="provenance"></span
+        ><a href="catalog/manifest.json" data-i18n="Extraktionsnachweis ↗"
+          >Extraction manifest ↗</a
+        >
+      </footer>
+    </main>
+    <div
+      class="audio-dock"
+      data-i18n-aria-label="Audiosteuerung"
+      aria-label="Audio controls"
+    >
+      <div>
+        <span class="status-dot" id="audio-dot"></span
+        ><span id="audio-status" role="status"
+          >AUDIO READY · CLICK TO PLAY</span
+        >
+      </div>
+      <label for="volume" data-i18n="LAUTSTÄRKE">VOLUME</label
+      ><input id="volume" type="range" min="0" max="100" value="35" /><button
+        id="stop-audio"
+        type="button"
+        data-i18n="■ Alles stoppen"
+      >
+        ■ Stop all
+      </button>
+    </div>
+    <noscript
+      >The interactive catalog requires JavaScript. / Der interaktive Katalog
+      benötigt JavaScript. / 交互式图鉴需要启用 JavaScript。
+      <a href="catalog/engine.js">catalog/engine.js</a></noscript
+    >
+    <script src="catalog/engine.js"></script>
+    <script type="module" src="catalog/app.js"></script>
+  </body>
+</html>
