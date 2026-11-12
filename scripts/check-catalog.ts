@@ -5,7 +5,7 @@ import { mathMarkup } from "../catalog/math.js";
 import { languages, messages, getLanguage } from "../catalog/i18n.js";
 
 const root = resolve(import.meta.dir, "..");
-const original = await Bun.file(resolve(root, "game.js")).text();
+const original = await Bun.file(resolve(root, "original/game.js")).text();
 const engine = await Bun.file(resolve(root, "catalog/engine.js")).text();
 const manifest = await Bun.file(resolve(root, "catalog/manifest.json")).json();
 const hash = new Bun.CryptoHasher("sha256").update(original).digest("hex");

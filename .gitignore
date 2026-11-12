@@ -6,3 +6,7 @@ node_modules/
 .env.*
 !.env.example
 *.log
+dist/
+.vite/
+scripts/.align.json
+scripts/.*-formatted.js

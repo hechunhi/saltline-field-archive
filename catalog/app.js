@@ -188,7 +188,7 @@ function renderSource(entry) {
     } else {
       code = api.functions[name].toString();
       const source = api.source.locations[name];
-      location = `<a href="game.js" target="_blank" rel="noopener">game.js</a> · ${escape(name)} · ${escape(t("Originalzeile {line} · Byte {byte}", { line: source?.line ?? "?", byte: source?.byte ?? "?" }))}<br>${escape(t("Für die Lesbarkeit formatiert. SHA-256 der Quelldatei: {hash}", { hash: api.source.sha256 }))}`;
+      location = `<a href="original/game.js" target="_blank" rel="noopener">game.js</a> · ${escape(name)} · ${escape(t("Originalzeile {line} · Byte {byte}", { line: source?.line ?? "?", byte: source?.byte ?? "?" }))}<br>${escape(t("Für die Lesbarkeit formatiert. SHA-256 der Quelldatei: {hash}", { hash: api.source.sha256 }))}`;
     }
     $("source-code").textContent = code;
     $("source-location").innerHTML = location;

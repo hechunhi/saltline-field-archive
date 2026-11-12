@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 
 // Reuse the local game's actual constructors and DSP; never start its game loop.
 const root = resolve(import.meta.dir, "..");
-const original = await Bun.file(resolve(root, "game.js")).text();
+const original = await Bun.file(resolve(root, "original/game.js")).text();
 const marker = "cL().catch(n=>yT(n&&n.stack||n));";
 if (original.split(marker).length !== 2) {
   throw new Error(

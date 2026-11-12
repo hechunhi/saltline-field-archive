@@ -1,15 +1,31 @@
 {
-  "name": "saltline-local",
+  "name": "saltline",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
+  "description": "Saltline: editable modular game + procedural object & sound catalog.",
   "scripts": {
-    "start": "bun server.ts",
-    "dev": "bun --watch server.ts",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "node scripts/check-source.mjs && node scripts/verify-archive.mjs && node scripts/verify-refactor.mjs",
+    "format": "prettier --write index.html \"src/**/*.js\" src/*.css vite.config.js scripts/*.mjs scripts/lib/*.mjs",
+    "verify:archive": "node scripts/verify-archive.mjs",
+    "verify:refactor": "node scripts/verify-refactor.mjs",
+    "legacy": "bun server.ts",
     "catalog:extract": "bun scripts/extract-catalog.ts",
     "catalog:check": "bun scripts/check-catalog.ts",
     "catalog:math": "bun scripts/render-catalog-math.ts"
   },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "devDependencies": {
-    "katex": "0.19.1"
+    "@babel/parser": "7.29.13",
+    "@babel/traverse": "7.29.13",
+    "katex": "0.19.1",
+    "prettier": "3.9.10",
+    "vite": "8.3.7"
   }
 }
