@@ -10,3 +10,5 @@ dist/
 .vite/
 scripts/.align.json
 scripts/.*-formatted.js
+
+.wrangler/

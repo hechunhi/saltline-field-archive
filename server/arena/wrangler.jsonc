@@ -1,0 +1,13 @@
+{
+  // Saltline arena lobby: rooms, WebRTC signaling, fallback packet relay, TURN credentials.
+  // Secrets (wrangler secret put): CF_TURN_KEY_ID, CF_TURN_KEY_TOKEN. Without them /ice returns STUN only.
+  "name": "saltline-arena",
+  "main": "worker.js",
+  "compatibility_date": "2026-09-15",
+  "account_id": "ff6e20cb367da1325eb126e95eea8756",
+  "durable_objects": { "bindings": [{ "name": "ROOM", "class_name": "ArenaRoom" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ArenaRoom"] }],
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": true, "head_sampling_rate": 0.05 }
+}

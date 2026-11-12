@@ -4770,5 +4770,17 @@
         2470
       ]
     }
+  ],
+  "patches": [
+    {
+      "file": "game/flow.js",
+      "statement": 2452,
+      "why": "arena mode: holdout setup without waves, mission enemies or the flow death screen (src/net/arena.js handles death/respawn)"
+    }
+  ],
+  "extensions": [
+    "net/p2p.js",
+    "net/arena-net.js",
+    "net/arena.js"
   ]
 }

@@ -161,6 +161,9 @@ function firstDifference(actual, expected, location = "statement") {
 normalizeBindings(originalRoot.get("body"), originalRoot.scope, {});
 const originalStatements = originalRoot.node.body.body;
 const covered = new Set();
+// Deliberate gameplay changes on top of the archive, listed in refactor-map.json "patches".
+const patched = new Set((map.patches || []).map((p) => `${p.file}#${p.statement}`));
+const patchReport = [];
 const report = [];
 for (const { file, statements } of map.modules) {
   const url = new URL(`src/${file}`, projectRoot);
@@ -192,6 +195,11 @@ for (const { file, statements } of map.modules) {
       `Original statement ${originalIndex} was duplicated`,
     );
     covered.add(originalIndex);
+    if (patched.has(`${file}#${originalIndex}`)) {
+      if (digest(actual[index]) !== digest(originalStatements[originalIndex]))
+        patchReport.push(`${file}, original statement ${originalIndex}`);
+      continue;
+    }
     assert.equal(
       digest(actual[index]),
       digest(originalStatements[originalIndex]),
@@ -207,12 +215,18 @@ assert.equal(
 );
 assert.equal(
   graph.size,
-  map.modules.length,
+  map.modules.length + (map.extensions || []).length,
   "Untracked runtime modules were added",
 );
 console.log(
   `Verified ${covered.size} original statements across ${report.length} modules`,
 );
+for (const file of map.extensions || [])
+  assert(graph.has(new URL(`src/${file}`, projectRoot).pathname), `Missing extension module ${file}`);
+if (map.extensions?.length)
+  console.log(`New modules outside the archive: ${map.extensions.join(", ")}`);
+if (patchReport.length)
+  console.log(`Patched archive statements (see "patches"): ${patchReport.join("; ")}`);
 console.log(
   "Expressions, constants, shader/template strings and lexical bindings match the archive",
 );

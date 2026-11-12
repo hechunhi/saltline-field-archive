@@ -218,7 +218,8 @@ function createGameFlow(n) {
       Object.assign(GAME_FLOW, c(f.flow), c(he.flow || {})),
       (C.difficulty = lb_2[Y] ? Y : "hard"));
   }
-  let p = () => g.mode === "holdout",
+  // arena (online free-for-all, src/net/arena.js) shares holdout's map setup: no relays, no extraction
+  let p = () => g.mode === "holdout" || g.mode === "arena",
     d = (Y) => Math.round(Y).toLocaleString("en-US");
   function m() {
     p() &&
@@ -595,6 +596,7 @@ function createGameFlow(n) {
       ee(!0));
   }
   function oe() {
+    if (g.mode === "arena") return "Arena \xB7 free for all";
     if (p())
       return g.waveOn
         ? "Hold the berth"
@@ -917,6 +919,8 @@ function createGameFlow(n) {
       J());
   }
   n.events.on("player:dead", () => {
+    // arena handles its own death and respawn
+    g.mode === "arena" ||
     (C.state !== "playing" && C.state !== "paused") ||
       (r.setGameplay && r.setGameplay(!1),
       r.exitLock(),
@@ -1032,7 +1036,7 @@ function createGameFlow(n) {
           return (le(), !1);
         if ((ge(Y), C.state !== "playing")) return !0;
         ($(Y),
-          p() && y(Y),
+          p() && g.mode !== "arena" && y(Y),
           (g.alertT = Math.max(0, g.alertT - Y)),
           (g.waveHot = Math.max(0, g.waveHot - Y)));
         let he = se();
