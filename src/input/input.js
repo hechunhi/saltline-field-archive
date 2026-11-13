@@ -97,6 +97,9 @@ function createInput(n) {
     device: "kbm",
     assist: 1,
     padName: "",
+    // touch layout options (set by src/input/touch-layout.js)
+    stickZone: 0.45,
+    adsHold: !1,
     uiPressed(ne) {
       return h.has(ne);
     },
@@ -167,7 +170,13 @@ function createInput(n) {
     (i.clear(),
       (u = 0),
       (W = !1),
-      R && (R.btn.ads.classList.remove("active"), oe(), (A = -1), (N = -1)));
+      R &&
+        (R.btn.ads.classList.remove("active"),
+        oe(),
+        (A = null),
+        (N = null),
+        R.held.clear(),
+        R.root.querySelectorAll(".t-btn.active").forEach((b) => b.classList.remove("active"))));
   }
   (addEventListener("keydown", (ne) => {
     let ye = KEY_BINDINGS[ne.code];
@@ -285,79 +294,114 @@ function createInput(n) {
   }
   let R = null,
     z = 0,
-    I = -1,
+    // touch trackers use null for "none": iOS can report negative touch identifiers (even -1)
+    I = null,
     L = 0,
     U = 0,
     k = 0,
     C = 0,
-    A = -1,
+    A = null,
     F = 0,
     H = 0,
-    N = -1,
+    N = null,
     Z = 0,
     Q = 0,
     W = !1;
   function J() {
     let ne = document.createElement("div");
-    ((ne.className = "touch"),
-      (ne.innerHTML =
-        '<div class="t-stick"><i class="t-ring"></i><i class="t-nub"></i></div><button class="t-btn t-fire" data-a="fire" aria-label="Fire"><span>FIRE</span></button><button class="t-btn t-ads" data-a="ads" aria-label="Aim"><span>AIM</span></button><button class="t-btn t-reload" data-a="reload" aria-label="Reload"><span>RLD</span></button><button class="t-btn t-swap" data-a="swap" aria-label="Swap weapon"><span>SWAP</span></button><button class="t-btn t-jump" data-a="jump" aria-label="Jump"><span>JUMP</span></button><button class="t-btn t-interact" data-a="interact" aria-label="Interact"><span>USE</span></button><button class="t-btn t-pause" data-a="pause" aria-label="Pause"><span>II</span></button>'),
-      t.appendChild(ne));
+    ne.className = "touch";
+    // key -> [action, label, aria]; keys ending in a digit are extra copies of an action
+    let defs = {
+      fire: ["fire", "FIRE", "Fire"],
+      fire2: ["fire", "FIRE", "Fire (second)"],
+      ads: ["ads", "AIM", "Aim"],
+      reload: ["reload", "RLD", "Reload"],
+      swap: ["swap", "SWAP", "Swap weapon"],
+      jump: ["jump", "JUMP", "Jump"],
+      crouch: ["crouch", "CRCH", "Crouch"],
+      interact: ["interact", "USE", "Interact"],
+      pause: ["pause", "II", "Pause"],
+    };
+    ne.innerHTML =
+      '<div class="t-stick"><i class="t-ring"></i><i class="t-nub"></i></div>' +
+      Object.entries(defs)
+        .map(
+          ([key, [, label, aria]]) =>
+            `<button class="t-btn t-${key}" data-a="${key}" aria-label="${aria}"><span>${label}</span></button>`,
+        )
+        .join("");
+    t.appendChild(ne);
     let ye = (Re) => ne.querySelector(Re),
       Te = {
         root: ne,
         stick: ye(".t-stick"),
         nub: ye(".t-nub"),
-        btn: {
-          fire: ye(".t-fire"),
-          ads: ye(".t-ads"),
-          reload: ye(".t-reload"),
-          swap: ye(".t-swap"),
-          jump: ye(".t-jump"),
-          interact: ye(".t-interact"),
-          pause: ye(".t-pause"),
-        },
+        btn: {},
+        held: new Map(), // action -> number of buttons holding it
       };
-    for (let Re in Te.btn) {
-      let Ue = Te.btn[Re];
+    for (let key in defs) Te.btn[key] = ye(".t-" + key);
+    let press = (act, down) => {
+      let n0 = Te.held.get(act) || 0,
+        n1 = Math.max(0, n0 + (down ? 1 : -1));
+      Te.held.set(act, n1);
+      n0 === 0 && n1 > 0 && v("touch", act, !0);
+      n0 > 0 && n1 === 0 && v("touch", act, !1);
+    };
+    for (let key in defs) {
+      let Ue = Te.btn[key],
+        act = defs[key][0],
+        own = null, // this button's finger
+        px = 0,
+        py = 0;
       Ue.addEventListener(
         "touchstart",
         (ze) => {
           (ze.preventDefault(), ze.stopPropagation(), (z = performance.now()));
           let Ge = ze.changedTouches[0];
-          if (Re === "ads") {
-            ((W = !W), Ue.classList.toggle("active", W));
+          // a lost touchend (system gesture, pause mid-hold) must not leave the button dead
+          if (own !== null) {
+            let live = !1;
+            for (let _e of ze.touches) _e.identifier === own && (live = !0);
+            if (live) return;
+            act === "ads" || press(act, !1);
+          }
+          own = Ge.identifier;
+          px = Ge.clientX;
+          py = Ge.clientY;
+          if (act === "ads") {
+            m.adsHold ? (W = !0) : (W = !W);
+            Ue.classList.toggle("active", W);
             return;
           }
-          (Re === "fire" &&
-            ((N = Ge.identifier), (Z = Ge.clientX), (Q = Ge.clientY)),
-            Ue.classList.add("active"),
-            v("touch", Re, !0));
+          (Ue.classList.add("active"), press(act, !0));
         },
         { passive: !1 },
       );
       let Ve = (ze) => {
-        if ((ze.preventDefault(), ze.stopPropagation(), Re !== "ads")) {
-          if (Re === "fire") {
-            let Ge = !1;
-            for (let _e of ze.changedTouches) _e.identifier === N && (Ge = !0);
-            if (!Ge) return;
-            N = -1;
-          }
-          (Ue.classList.remove("active"), v("touch", Re, !1));
+        ze.preventDefault();
+        ze.stopPropagation();
+        let Ge = !1;
+        for (let _e of ze.changedTouches) _e.identifier === own && (Ge = !0);
+        if (!Ge) return;
+        own = null;
+        if (act === "ads") {
+          m.adsHold && ((W = !1), Ue.classList.remove("active"));
+          return;
         }
+        (Ue.classList.remove("active"), press(act, !1));
       };
       (Ue.addEventListener("touchend", Ve, { passive: !1 }),
         Ue.addEventListener("touchcancel", Ve, { passive: !1 }),
         Ue.addEventListener(
           "touchmove",
           (ze) => {
-            if ((ze.preventDefault(), Re === "fire"))
+            // dragging off a fire or aim button keeps aiming, like the look side of the screen
+            if ((ze.preventDefault(), act === "fire" || act === "ads"))
               for (let Ge of ze.changedTouches)
-                Ge.identifier === N &&
-                  (G(Ge.clientX - Z, Ge.clientY - Q),
-                  (Z = Ge.clientX),
-                  (Q = Ge.clientY));
+                Ge.identifier === own &&
+                  (G(Ge.clientX - px, Ge.clientY - py),
+                  (px = Ge.clientX),
+                  (py = Ge.clientY));
           },
           { passive: !1 },
         ),
@@ -380,7 +424,7 @@ function createInput(n) {
       d("touch"));
   }
   function oe() {
-    ((I = -1), (k = C = 0), R && R.stick.classList.remove("on"));
+    ((I = null), (k = C = 0), R && R.stick.classList.remove("on"));
   }
   (addEventListener(
     "touchstart",
@@ -394,7 +438,7 @@ function createInput(n) {
       (ne) => {
         if ((ne.preventDefault(), !!r))
           for (let ye of ne.changedTouches)
-            ye.clientX < innerWidth * 0.45 && I < 0
+            ye.clientX < innerWidth * m.stickZone && I === null
               ? ((I = ye.identifier),
                 (L = ye.clientX),
                 (U = ye.clientY),
@@ -403,7 +447,7 @@ function createInput(n) {
                   ((R.stick.style.transform = `translate3d(${L}px,${U}px,0)`),
                   (R.nub.style.transform = "translate3d(0,0,0)"),
                   R.stick.classList.add("on")))
-              : A < 0 &&
+              : A === null &&
                 ((A = ye.identifier), (F = ye.clientX), (H = ye.clientY));
       },
       { passive: !1 },
@@ -432,7 +476,7 @@ function createInput(n) {
     ));
   let ee = (ne) => {
     for (let ye of ne.changedTouches)
-      ye.identifier === I ? oe() : ye.identifier === A && (A = -1);
+      ye.identifier === I ? oe() : ye.identifier === A && (A = null);
   };
   (e.addEventListener("touchend", ee, { passive: !1 }),
     e.addEventListener("touchcancel", ee, { passive: !1 }));
@@ -595,7 +639,7 @@ function createInput(n) {
       ((ye = (i.has("right") ? 1 : 0) - (i.has("left") ? 1 : 0)),
         (Te = (i.has("forward") ? 1 : 0) - (i.has("back") ? 1 : 0)),
         (Re = i.has("sprint")),
-        I >= 0 &&
+        I !== null &&
           ((ye += k),
           (Te += C),
           Math.hypot(k, C) > 0.93 && C > 0.8 && (Re = !0)),

@@ -4776,11 +4776,17 @@
       "file": "game/flow.js",
       "statement": 2452,
       "why": "arena mode: holdout setup without waves, mission enemies or the flow death screen (src/net/arena.js handles death/respawn)"
+    },
+    {
+      "file": "input/input.js",
+      "statement": 1939,
+      "why": "iPad touch: null sentinels for touch ids (iOS ids can be negative, which froze the move stick), per-finger buttons, extra buttons, stickZone/adsHold options for src/input/touch-layout.js"
     }
   ],
   "extensions": [
     "net/p2p.js",
     "net/arena-net.js",
-    "net/arena.js"
+    "net/arena.js",
+    "input/touch-layout.js"
   ]
 }
